@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NarcoSentry | Drug Detection Dashboard</title>
+    <!-- Link to the stylesheet -->
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Socket.IO client for real-time updates with the backend -->
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-shield-alt"></i></div>
+                <div class="logo-text">NarcoSentry</div>
+            </div>
+            <div class="header-controls">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search alerts...">
+                </div>
+                <div class="user-menu">
+                    <div class="notification-badge">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">300</span>
+                    </div>
+                    <div class="user-avatar">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-6.627 0-12 5.373-12 12h24c0-6.627-5.373-12-12-12z'/%3E%3C/svg%3E" alt="User">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Stats Cards Section - Values will be populated by script.js -->
+        <div class="stats-cards">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-comments"></i></div>
+                <div class="stat-content">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Messages Analyzed</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-user-secret"></i></div>
+                <div class="stat-content">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Sellers Detected</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-ban"></i></div>
+                <div class="stat-content">
+                    <div class="stat-value">0</div>
+                    <div class="stat-label">Accounts Blocked</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-bolt"></i></div>
+                <div class="stat-content">
+                    <div class="stat-value">0%</div>
+                    <div class="stat-label">Real-time Accuracy</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-title">
+            <h1>Live Alerts Dashboard</h1>
+            <p>Real-time monitoring of suspicious activities from AI-generated data</p>
+        </div>
+
+        <div class="dashboard-content">
+            <div class="alerts-section">
+                <div class="section-header">
+                    <h2>Recent Alerts</h2>
+                    <div class="filter-controls">
+                        <select id="riskFilter">
+                            <option value="all">All Risks</option>
+                            <option value="high">High Risk</option>
+                            <option value="medium">Medium Risk</option>
+                            <option value="low">Low Risk</option>
+                        </select>
+                        <button class="refresh-btn"><i class="fas fa-sync-alt"></i> Refresh</button>
+                    </div>
+                </div>
+                <div class="alerts-container">
+                    <!-- Alerts will be populated by JavaScript from the backend -->
+                </div>
+            </div>
+
+            <div class="model-health-section">
+                <div class="section-header">
+                    <h2>Model Health</h2>
+                </div>
+                <div class="model-health-card">
+                    <div class="metrics-grid">
+                        <div class="metric">
+                            <div class="metric-label">Precision</div>
+                            <div class="metric-value">0.0</div>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Recall</div>
+                            <div class="metric-value">0.0</div>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">F1 Score</div>
+                            <div class="metric-value">0.0</div>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="model-info">
+                        <div class="info-item">
+                            <span class="info-label">Last retrain:</span>
+                            <span class="info-value">N/A</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Version:</span>
+                            <span class="info-value">N/A</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Status:</span>
+                            <span class="status-badge"></span>
+                        </div>
+                    </div>
+                    <div class="health-actions">
+                        <button class="action-btn retrain"><i class="fas fa-sync"></i> Retrain Model</button>
+                        <button class="action-btn details"><i class="fas fa-chart-line"></i> View Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link to the JavaScript file that connects to the backend -->
+    <script src="/static/script.js"></script>
+</body>
+</html>
